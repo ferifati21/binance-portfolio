@@ -1,0 +1,33 @@
+.Coin {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+}
+
+.Name {
+  display: flex;
+  align-items: center;
+  margin-right: 1em;
+  min-width: 5em;
+}
+
+.Image {
+  margin-right: 0.5em;
+}
+
+.Total {
+  text-align: right;
+  min-width: 8em;
+  margin-right: 2em;
+}
+
+.Percentage {
+  text-align: right;
+  min-width: 5em;
+  margin-right: 2em;
+}
+
+.Price {
+  text-align: right;
+  min-width: 5em;
+}

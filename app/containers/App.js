@@ -1,34 +1,65 @@
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import Header from '../components/Header';
-import MainSection from '../components/MainSection';
-import * as TodoActions from '../actions/todos';
+import Price from '../components/Price';
+import Portfolio from '../components/Portfolio';
+import {loadPortfolio, portfolioTotalValue} from './PortfolioLoader';
 import style from './App.css';
 
-@connect(
-  state => ({
-    todos: state.todos
-  }),
-  dispatch => ({
-    actions: bindActionCreators(TodoActions, dispatch)
-  })
-)
 export default class App extends Component {
+  state = {
+    portfolio: [],
+    currency: 'EUR',
+    btcPrice: {
+      BTC: 1,
+      USD: 0,
+      EUR: 0,
+      GBP: 0,
+      CNY: 0,
+    }
+  }
 
-  static propTypes = {
-    todos: PropTypes.array.isRequired,
-    actions: PropTypes.object.isRequired
-  };
+  componentDidMount() {
+    const {currency} = this.state;
+
+    fetchBTCRate().then((btcPrice) => {
+      this.setState({
+        btcPrice,
+        portfolio: loadPortfolio(btcPrice[currency]),
+      });
+    })
+  }
+
+  handleChangeCurrency = (currency) => {
+    const {btcPrice} = this.state;
+
+    this.setState({
+      currency,
+      portfolio: loadPortfolio(btcPrice[currency]),
+    });
+  }
 
   render() {
-    const { todos, actions } = this.props;
+    const {portfolio, btcPrice, currency} = this.state
 
     return (
-      <div className={style.normal}>
-        <Header addTodo={actions.addTodo} />
-        <MainSection todos={todos} actions={actions} />
+      <div className={style.App}>
+        <Header portfolioValue={portfolioTotalValue(portfolio)} onCurrencyChange={this.handleChangeCurrency} currency={currency} />
+        <Portfolio currency={currency} btcPrice={btcPrice} portfolio={portfolio} />
       </div>
     );
   }
+}
+
+function fetchBTCRate() {
+  return fetch('https://api.coindesk.com/v2/bpi/currentprice.json')
+    .then((response) => response.json())
+    .then((response) => {
+      return {
+        BTC: 1,
+        USD: parseFloat(response.bpi.USD.rate.replace(',', '')),
+        EUR: parseFloat(response.bpi.EUR.rate.replace(',', '')),
+        GBP: parseFloat(response.bpi.GBP.rate.replace(',', '')),
+        CNY: parseFloat(response.bpi.CNY.rate.replace(',', '')),
+      }
+    })
 }
