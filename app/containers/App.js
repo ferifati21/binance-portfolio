@@ -21,16 +21,16 @@ export default class App extends Component {
   componentDidMount() {
     const {currency} = this.state;
 
-    chrome.storage.local.get('currency', ({currency}) => {
-      if (currency) {
-        this.setState({currency});
-      }
-    });
-
     fetchBTCRate().then((btcPrice) => {
+      chrome.storage.local.get('currency', ({currency}) => {
+        if (currency) {
+          this.setState({currency});
+        }
+      });
+
       this.setState({
         btcPrice,
-        portfolio: loadPortfolio(btcPrice[currency]),
+        portfolio: loadPortfolio(btcPrice),
       });
     })
   }
@@ -38,10 +38,7 @@ export default class App extends Component {
   handleChangeCurrency = (currency) => {
     const {btcPrice} = this.state;
     chrome.storage.local.set({currency});
-    this.setState({
-      currency,
-      portfolio: loadPortfolio(btcPrice[currency]),
-    });
+    this.setState({currency});
   }
 
   render() {
@@ -49,7 +46,7 @@ export default class App extends Component {
 
     return (
       <div className={style.App}>
-        <Header portfolioValue={portfolioTotalValue(portfolio)} onCurrencyChange={this.handleChangeCurrency} currency={currency} />
+        <Header portfolioValue={portfolioTotalValue(portfolio, currency)} onCurrencyChange={this.handleChangeCurrency} currency={currency} />
         {portfolio.length === 0 ?
           <Loading />
           : <Portfolio currency={currency} btcPrice={btcPrice} portfolio={portfolio} />

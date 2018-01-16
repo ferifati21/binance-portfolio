@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class Price extends Component{
+export default class Price extends Component {
   static propTypes = {
     price: PropTypes.number.isRequired,
     currency: PropTypes.string.isRequired,
