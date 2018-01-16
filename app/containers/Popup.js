@@ -19,7 +19,7 @@ export default class Popup extends Component {
           Created by <a target="_blank" href="https://twitter.com/nimz_co">@nimz_co</a>
         </p>
         <p>
-          Tip jar 🍻:
+          <strong>Tip jar 🍺</strong>
           <br />
           BTC: <code>1JHkaxDz3cmVQEz9BdDir3wmzAvFQBZNMf</code>
           <br />
