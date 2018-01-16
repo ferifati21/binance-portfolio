@@ -9,26 +9,21 @@ export default class Popup extends Component {
           Binance portfolio
         </h1>
         <p>
-          Go to your&nbsp;
-          <a target="_blank" href="https://www.binance.com/userCenter/depositWithdraw.html">Deposits & Withdrawals</a>&nbsp;
-          page to see your portfolio.
+          Go to your <a target="_blank" href="https://www.binance.com/userCenter/depositWithdraw.html">Deposits & Withdrawals</a> page to see your portfolio.
         </p>
         <p>
           <a target="_blank" href="https://github.com/nimzco/binance-portfolio">Suggest a feature</a>
         </p>
-        <p>
-          Created by
-          <a target="_blank" href="https://twitter.com/nimz_co">
-            @nimz_co
-          </a>
-        </p>
         <hr />
         <p>
-          Buy me a beer:
+          Created by <a target="_blank" href="https://twitter.com/nimz_co">@nimz_co</a>
+        </p>
+        <p>
+          Tip jar 🍻:
           <br />
-          BTC: 1JHkaxDz3cmVQEz9BdDir3wmzAvFQBZNMf
+          BTC: <code>1JHkaxDz3cmVQEz9BdDir3wmzAvFQBZNMf</code>
           <br />
-          ETH: 0xa8d740a68089b63ca1ea095792fbba29f7cdbf4d
+          ETH: <code>0xa8d740a68089b63ca1ea095792fbba29f7cdbf4d</code>
         </p>
       </div>
     );

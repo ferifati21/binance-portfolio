@@ -6,11 +6,19 @@ export default class Price extends Component{
     currency: PropTypes.string.isRequired,
   };
 
-  render() {
+  price() {
     const {price, currency} = this.props
+    if (currency === 'BTC') {
+      return `${price.toFixed(8)} BTC`
+    } else {
+      return price.toLocaleString('en', {style: 'currency', currency: currency})
+    }
+  }
+
+  render() {
     return (
       <span>
-        {price.toLocaleString('en', {style: 'currency', currency: currency})}
+        {this.price()}
       </span>
     );
   }

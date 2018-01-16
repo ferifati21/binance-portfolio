@@ -19,7 +19,7 @@ export default function Coin(props) {
         {name}
       </div>
       <div className={styles.Total}>
-        {total}
+        {Number(total)}
       </div>
       <div className={styles.Percentage}>
         {(percentage / 100).toLocaleString('en', {style: 'percent', maximumFractionDigits: 1})}

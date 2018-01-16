@@ -44,12 +44,22 @@ export default class App extends Component {
     return (
       <div className={style.App}>
         <Header portfolioValue={portfolioTotalValue(portfolio)} onCurrencyChange={this.handleChangeCurrency} currency={currency} />
-        <Portfolio currency={currency} btcPrice={btcPrice} portfolio={portfolio} />
+        {portfolio.length === 0 ?
+          <Loading />
+          : <Portfolio currency={currency} btcPrice={btcPrice} portfolio={portfolio} />
+        }
       </div>
     );
   }
 }
 
+function Loading() {
+  return (
+    <div>
+      Loading portfolio...
+    </div>
+  )
+}
 function fetchBTCRate() {
   return fetch('https://api.coindesk.com/v2/bpi/currentprice.json')
     .then((response) => response.json())

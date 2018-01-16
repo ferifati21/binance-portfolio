@@ -33,7 +33,7 @@ export default class Header extends Component {
         {Object.keys(CURRENCY_SIGN).map((_currency) =>
           <a
             key={_currency}
-            className={classNames(styles.Button, _currency === currency && styles.ButtonLala)}
+            className={classNames(styles.Button, _currency === currency && styles.active)}
             onClick={() => onCurrencyChange(_currency)}
           >
             {CURRENCY_SIGN[_currency]}

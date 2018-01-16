@@ -25,15 +25,14 @@ h4 {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 0.3em 0.6em;
-  transition: background-color 250ms ease-in border-color 250ms ease-in;
 }
 
 .Button:hover {
   background-color: rgba(244, 186, 47, 0.3);
-  border-color: #c59114;
+  border-color: rgba(197, 145, 20, 0.65);
 }
 
-.ButtonLala {
+.active {
   background-color: #f4ba2f;
   border-color: #c59114;
 }
