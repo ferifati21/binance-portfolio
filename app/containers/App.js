@@ -21,6 +21,12 @@ export default class App extends Component {
   componentDidMount() {
     const {currency} = this.state;
 
+    chrome.storage.local.get('currency', ({currency}) => {
+      if (currency) {
+        this.setState({currency});
+      }
+    });
+
     fetchBTCRate().then((btcPrice) => {
       this.setState({
         btcPrice,
@@ -31,7 +37,7 @@ export default class App extends Component {
 
   handleChangeCurrency = (currency) => {
     const {btcPrice} = this.state;
-
+    chrome.storage.local.set({currency});
     this.setState({
       currency,
       portfolio: loadPortfolio(btcPrice[currency]),
