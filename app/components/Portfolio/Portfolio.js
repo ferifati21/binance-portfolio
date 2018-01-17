@@ -1,6 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react';
-import Price from '../components/Price';
-import Coin from '../components/Coin';
+import Price from '../../components/Price';
+import Coin from '../../components/Coin';
 import styles from './Portfolio.css';
 
 export default class Portfolio extends PureComponent {

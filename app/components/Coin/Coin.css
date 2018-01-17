@@ -13,6 +13,9 @@
 
 .Image {
   margin-right: 0.5em;
+  height: 20px;
+  width: 20px;
+  display: block;
 }
 
 .Total {

@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import classNames from 'classnames';
-import Price from '../components/Price';
+import Price from '../../components/Price';
 import styles from './Header.css';
 
 const CURRENCIES = ['BTC', 'USD', 'EUR', 'GBP', 'CNY'];
@@ -13,23 +13,39 @@ const CURRENCY_SIGN = {
 }
 
 export default class Header extends Component {
+  static propTypes = {
+    onCurrencyChange: PropTypes.func.isRequired,
+    portfolioValue: PropTypes.number.isRequired,
+  };
+
+  static contextTypes = {
+    currency: PropTypes.string,
+  };
+
+  portfolioValue() {
+    const {portfolioValue} = this.props;
+    if (!portfolioValue) { return null; }
+
+    return (
+      <span className={styles.Price}>
+        <Price price={portfolioValue}/>
+      </span>
+    )
+  }
+
   render() {
     const {
       onCurrencyChange,
-      currency,
       portfolioValue
     } = this.props;
+    const {currency} = this.context;
 
     return (
       <header className={styles.Header}>
-        <h3>
-          Binance portfolio
-          –&nbsp;
-          {portfolioValue ?
-            <Price currency={currency} price={portfolioValue}/>
-            : null
-          }
-        </h3>
+        <div className={styles.TitleWrapper}>
+          <h3>Your portfolio</h3>
+          {this.portfolioValue()}
+        </div>
         {Object.keys(CURRENCY_SIGN).map((_currency) =>
           <a
             key={_currency}

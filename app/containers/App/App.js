@@ -1,11 +1,21 @@
 import React, { Component, PropTypes } from 'react';
-import Header from '../components/Header';
-import Price from '../components/Price';
-import Portfolio from '../components/Portfolio';
+import Header from '../../components/Header';
+import Price from '../../components/Price';
+import Portfolio from '../../components/Portfolio';
 import {loadPortfolio, portfolioTotalValue} from './PortfolioLoader';
 import style from './App.css';
 
 export default class App extends Component {
+  static childContextTypes = {
+    currency: PropTypes.string,
+  };
+
+  getChildContext() {
+    return {
+      currency: this.state.currency,
+    };
+  }
+
   state = {
     portfolio: [],
     currency: 'EUR',

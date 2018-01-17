@@ -6,7 +6,7 @@ export default class Popup extends Component {
     return (
       <div className={styles.Popup}>
         <h1>
-          Binance portfolio
+          Your Binance portfolio
         </h1>
         <p>
           Go to your <a target="_blank" href="https://www.binance.com/userCenter/depositWithdraw.html">Deposits & Withdrawals</a> page to see your portfolio.

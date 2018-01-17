@@ -1,13 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 
 export default class Price extends Component {
+  static contextTypes = {
+    currency: PropTypes.string,
+  };
+
   static propTypes = {
     price: PropTypes.number.isRequired,
-    currency: PropTypes.string.isRequired,
   };
 
   price() {
-    const {price, currency} = this.props
+    const {price} = this.props;
+    const {currency} = this.context;
+
     if (currency === 'BTC') {
       return `${price.toFixed(8)} BTC`
     } else {
