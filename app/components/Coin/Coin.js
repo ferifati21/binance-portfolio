@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import Price from '../../components/Price';
 import styles from './Coin.css';
+import classNames from 'classnames';
 
 export default class Coin extends PureComponent {
   static propTypes = {
@@ -26,21 +27,21 @@ export default class Coin extends PureComponent {
     const {currency} = this.context;
 
     return (
-      <div className={styles.Coin}>
-        <div className={styles.Name}>
+      <tr className={styles.Coin}>
+        <td className={styles.Name}>
           <img className={styles.Image}  src={imageURL} />
           {name}
-        </div>
-        <div className={styles.Total}>
+        </td>
+        <td className={styles.Total}>
           {total}
-        </div>
-        <div className={styles.Percentage}>
+        </td>
+        <td className={styles.Percentage}>
           {(percentage / 100).toLocaleString('en', {style: 'percent', maximumFractionDigits: 1})}
-        </div>
-        <div className={styles.Price}>
+        </td>
+        <td className={styles.Price}>
           <Price price={prices[currency]} />
-        </div>
-      </div>
+        </td>
+      </tr>
     )
   }
 }

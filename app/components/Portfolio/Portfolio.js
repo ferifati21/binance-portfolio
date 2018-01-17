@@ -9,11 +9,21 @@ export default class Portfolio extends PureComponent {
 
     return (
       <section className={styles.Portfolio}>
-        <div>
-          {portfolio.map((coin) =>
-            <Coin key={coin.name} {...coin} currency={currency} />
-          )}
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Number</th>
+              <th>%</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {portfolio.map((coin) =>
+              <Coin key={coin.name} {...coin} currency={currency} />
+            )}
+          </tbody>
+        </table>
       </section>
     );
   }

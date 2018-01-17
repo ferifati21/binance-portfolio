@@ -1,3 +1,29 @@
 .Portfolio {
+  display: inline-block;
+  border-radius: 2px;
+  border: 1px solid #e6e6e6;
+  border-bottom: none;
+}
 
+.Portfolio thead th {
+  background: #f4f4f4;
+  border-bottom: 1px solid #e6e6e6;
+  text-align: center;
+}
+
+.Portfolio td,
+.Portfolio th {
+  padding: 0.4em 0.5em;
+  border-right: 1px solid #e6e6e6;
+}
+
+.Portfolio td:first-child,
+.Portfolio th:first-child {
+  padding-left: 0.8em;
+}
+
+.Portfolio td:last-child,
+.Portfolio th:last-child {
+  padding-right: 0.8em;
+  border-right: none;
 }

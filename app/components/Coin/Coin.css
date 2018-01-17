@@ -1,14 +1,10 @@
 .Coin {
-  display: flex;
-  align-items: center;
-  margin-bottom: 0.5em;
+  border-bottom: 1px solid #e6e6e6;
 }
 
 .Name {
   display: flex;
   align-items: center;
-  margin-right: 1em;
-  min-width: 5em;
 }
 
 .Image {
@@ -20,17 +16,12 @@
 
 .Total {
   text-align: right;
-  min-width: 8em;
-  margin-right: 2em;
 }
 
 .Percentage {
   text-align: right;
-  min-width: 5em;
-  margin-right: 2em;
 }
 
 .Price {
   text-align: right;
-  min-width: 5em;
 }
