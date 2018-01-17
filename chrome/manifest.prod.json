@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "name": "binance-portfolio",
+  "version": "1.0.3",
+  "name": "Binance portfolio distribution and price",
   "manifest_version": 2,
   "description": "See the distribution and the value of your Binance Portfolio",
   "browser_action": {
