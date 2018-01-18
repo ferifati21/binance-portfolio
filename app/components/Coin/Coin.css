@@ -25,3 +25,16 @@
 .Price {
   text-align: right;
 }
+
+.Growth {
+  text-align: right;
+  font-weight: bold;
+}
+
+.positive {
+  color: #20af0e;
+}
+
+.negative {
+  color: red;
+}

@@ -24,8 +24,15 @@ h3 {
   padding: 0.4em 0.7em;
   border-radius: 3px;
   font-size: 15px;
-  background: #3dc159;
   color: white;
+}
+
+.positive {
+  background: #3dc159;
+}
+
+.negative {
+  background: #de4545;
 }
 
 .Button {
@@ -45,3 +52,11 @@ h3 {
   border-color: #c59114;
 }
 
+
+.positiveGrowth {
+  color: green;
+}
+
+.negativeGrowth {
+  color: red;
+}
