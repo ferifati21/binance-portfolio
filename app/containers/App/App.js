@@ -89,6 +89,9 @@ export default class App extends Component {
           : null
         }
         {isLoading ? <Loading /> : null}
+        <div>
+          1 BTC = <Price price={btcPrice[currency]} />
+        </div>
       </div>
     );
   }
