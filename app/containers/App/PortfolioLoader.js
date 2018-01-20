@@ -48,18 +48,6 @@ export function portfolioTotalValue(portfolio, currency) {
   }).reduce((a, b) => { return a + b; }, 0);
 }
 
-export function loadMarketData(portfolio) {
-  return portfolio.map((coin) => {
-    return coinInformationBinance(coin)
-      .then((response) => {
-        return {
-          ...response,
-          ...coin
-        }
-      })
-  });
-}
-
 export function fetchBTCRate() {
   return fetch('https://api.coindesk.com/v2/bpi/currentprice.json')
     .then((response) => response.json())
@@ -82,30 +70,6 @@ export function loadMarketCapData() {
     responseArr.map((response) => marketData[response.symbol] = response);
     return marketData;
   });
-}
-
-function coinInformationBinance(coin, baseSymbol = "BTC") {
-  const {name, symbol} = coin;
-  if (symbol === baseSymbol) {
-    return Promise.resolve({
-      priceChangePercent: '',
-    });
-  }
-
-  return fetch(`https://api.binance.com/api/v1/ticker/24hr?symbol=${symbol}${baseSymbol}`)
-    .then((response) => response.json())
-    .then((response) => {
-      const priceDifs = {};
-
-      Object.keys(coin.prices).map((currency) => {
-        priceDifs[currency] =
-          coin.prices[currency] - (coin.prices[currency] * 100 / (Number(response.priceChangePercent) + 100))
-      });
-      return {
-        priceChangePercent: response.priceChangePercent,
-        priceChangeValues: priceDifs,
-      }
-    })
 }
 
 export function portfolioValueChange(portfolio, currency) {

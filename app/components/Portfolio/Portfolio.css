@@ -28,3 +28,11 @@
   padding-right: 0.8em;
   border-right: none;
 }
+
+.Filters {
+  margin-bottom: 0.5em;
+}
+
+.Filters label {
+  margin-right: 0.5em;
+}

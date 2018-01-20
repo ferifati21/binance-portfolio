@@ -27,7 +27,7 @@ export default class Header extends Component {
     if (!portfolioValue) { return null; }
 
     return (
-      <span className={classNames(styles.Price, (growth > 0 ? styles.positive : styles.negative))}>
+      <span className={classNames(styles.Price, styles.positive)}>
         <Price price={portfolioValue}/>
       </span>
     )
@@ -46,11 +46,6 @@ export default class Header extends Component {
         <div className={styles.TitleWrapper}>
           <h3>Your portfolio</h3>
           {this.portfolioValue()}
-          {growth ?
-            <span className={(growth > 0 ? styles.positiveGrowth : styles.negativeGrowth)}>
-              &nbsp;{(growth > 0 ? '+' : null)}<Price price={growth} />
-            </span>
-          : null}
         </div>
         {Object.keys(CURRENCY_SIGN).map((_currency) =>
           <a

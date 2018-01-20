@@ -6,7 +6,6 @@ import {
   fetchBTCRate,
   loadPortfolio,
   portfolioTotalValue,
-  loadMarketData,
   loadMarketCapData,
   portfolioValueChange,
 } from './PortfolioLoader';
@@ -61,11 +60,6 @@ export default class App extends Component {
       .then((marketData) => {
         this.setState({marketData})
       });
-
-    Promise.all(loadMarketData(portfolio))
-      .then((portfolio) => {
-        this.setState({portfolio})
-      })
   }
 
   handleChangeCurrency = (currency) => {

@@ -18,16 +18,7 @@ export default class Coin extends PureComponent {
     currency: PropTypes.string,
   };
 
-  priceDif() {
-    const {currency} = this.context;
-    const {priceChangeValues} = this.props;
-    if (!priceChangeValues) { return; }
-
-    return <Price price={priceChangeValues[currency]} />;
-  }
-
-  percentage() {
-    const {priceChangePercent} = this.props;
+  percentage(priceChangePercent) {
     if (!priceChangePercent) { return; }
 
     return (Number(priceChangePercent) / 100).toLocaleString('en', {
@@ -46,8 +37,9 @@ export default class Coin extends PureComponent {
       marketCap,
       repartitionPercentage,
       priceChangePercent,
-      updateGrowthType,
-      growthType,
+      percentChange1h,
+      percentChange24h,
+      percentChange7d,
     } = this.props;
     const {currency} = this.context;
 
@@ -69,11 +61,14 @@ export default class Coin extends PureComponent {
         <td className={styles.Price}>
           <Price price={prices[currency]} />
         </td>
-        <td
-          className={classNames(styles.Growth, priceChangePercent > 0 ? styles.positive : styles.negative)}
-          onClick={updateGrowthType}
-        >
-          {growthType === '%' ? this.percentage() : this.priceDif()}
+        <td className={classNames(styles.Growth, percentChange1h > 0 ? styles.positive : styles.negative)}>
+          {this.percentage(percentChange1h)}
+        </td>
+        <td className={classNames(styles.Growth, percentChange24h > 0 ? styles.positive : styles.negative)}>
+          {this.percentage(percentChange24h)}
+        </td>
+        <td className={classNames(styles.Growth, percentChange7d > 0 ? styles.positive : styles.negative)}>
+          {this.percentage(percentChange7d)}
         </td>
       </tr>
     )

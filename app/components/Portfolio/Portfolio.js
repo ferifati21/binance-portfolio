@@ -7,14 +7,7 @@ const BASE_SYMBOLS = ['BTC', 'ETH'];
 export default class Portfolio extends PureComponent {
   state = {
     baseSymbol: 'BTC',
-    growthType: '%',
-  }
-
-  updateGrowthType = (event) => {
-    const {growthType} = this.state;
-    this.setState({
-      growthType: growthType === '%' ? '$' : '%',
-    })
+    hideSmallAssets: true,
   }
 
   updateBase = (event) => {
@@ -24,39 +17,61 @@ export default class Portfolio extends PureComponent {
     });
   }
 
+  handleSmallAssetsChange = () => {
+    this.setState({
+      hideSmallAssets: !this.state.hideSmallAssets,
+    })
+  }
+
   render() {
     const {portfolio, currency, marketData} = this.props;
-    const {baseSymbol, growthType} = this.state;
+    const {hideSmallAssets, baseSymbol} = this.state;
 
     return (
-      <section className={styles.Portfolio}>
-        <table>
-          <thead>
-            <tr>
-              <th>Symbol</th>
-              <th>Number</th>
-              <th>Market Cap</th>
-              <th>%</th>
-              <th>Value</th>
-              <th>
-                24h ⤴
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {portfolio.map((coin) =>
-              <Coin
-                {...coin}
-                growthType={growthType}
-                baseSymbol={baseSymbol}
-                marketCap={marketData[baseSymbol] ? Number(marketData[coin.symbol].market_cap_usd) : null}
-                key={coin.symbol}
-                updateGrowthType={this.updateGrowthType}
-                currency={currency}
-              />
-            )}
-          </tbody>
-        </table>
+
+      <section>
+        <div className={styles.Filters}>
+          <label htmlFor="binance-portfolio__hide-small-assets">Hide small assets</label>
+          <input
+            id="binance-portfolio__hide-small-assets"
+            type="checkbox"
+            checked={hideSmallAssets}
+            onChange={this.handleSmallAssetsChange}
+          />
+        </div>
+
+        <div className={styles.Portfolio}>
+          <table>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Number</th>
+                <th>Market Cap</th>
+                <th>%</th>
+                <th>Value</th>
+                <th>1h ⤴</th>
+                <th>24h ⤴</th>
+                <th>7d ⤴</th>
+              </tr>
+            </thead>
+            <tbody>
+              {portfolio.map((coin) => {
+                console.log(coin.repartitionPercentage)
+                if (hideSmallAssets && coin.repartitionPercentage < 0.5) { return null; }
+                return <Coin
+                  {...coin}
+                  baseSymbol={baseSymbol}
+                  marketCap={marketData[baseSymbol] ? Number(marketData[coin.symbol].market_cap_usd) : null}
+                  percentChange1h={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_1h) : null}
+                  percentChange24h={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_24h) : null}
+                  percentChange7d={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_7d) : null}
+                  key={coin.symbol}
+                  currency={currency}
+                />
+              })}
+            </tbody>
+          </table>
+        </div>
       </section>
     );
   }
