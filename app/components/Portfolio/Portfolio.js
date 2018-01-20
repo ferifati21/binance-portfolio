@@ -46,6 +46,7 @@ export default class Portfolio extends PureComponent {
               <tr>
                 <th>Symbol</th>
                 <th>Number</th>
+                <th>Coin value</th>
                 <th>Market Cap</th>
                 <th>%</th>
                 <th>Value</th>

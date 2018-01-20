@@ -36,7 +36,6 @@ export default class Coin extends PureComponent {
       total,
       marketCap,
       repartitionPercentage,
-      priceChangePercent,
       percentChange1h,
       percentChange24h,
       percentChange7d,
@@ -51,6 +50,9 @@ export default class Coin extends PureComponent {
         </td>
         <td className={styles.Total}>
           {total}
+        </td>
+        <td className={styles.Total}>
+          <Price price={prices[currency] / total} />
         </td>
         <td className={styles.Total}>
           {marketCap ? <Price price={marketCap} currency="USD" cents={false} /> : null}
