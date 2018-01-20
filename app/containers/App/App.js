@@ -7,9 +7,10 @@ import {
   loadPortfolio,
   portfolioTotalValue,
   loadMarketData,
+  loadMarketCapData,
   portfolioValueChange,
 } from './PortfolioLoader';
-import style from './App.css';
+import styles from './App.css';
 
 export default class App extends Component {
   static childContextTypes = {
@@ -24,6 +25,7 @@ export default class App extends Component {
 
   state = {
     isLoading: true,
+    marketData: [],
     portfolio: [],
     currency: 'EUR',
     btcPrice: {
@@ -55,6 +57,11 @@ export default class App extends Component {
 
   loadMarketData = () => {
     const {portfolio} = this.state;
+    loadMarketCapData()
+      .then((marketData) => {
+        this.setState({marketData})
+      });
+
     Promise.all(loadMarketData(portfolio))
       .then((portfolio) => {
         this.setState({portfolio})
@@ -72,11 +79,12 @@ export default class App extends Component {
       portfolio,
       btcPrice,
       currency,
+      marketData,
       isLoading
     } = this.state;
 
     return (
-      <div className={style.App}>
+      <div className={styles.App}>
         <Header
           portfolioValue={portfolioTotalValue(portfolio, currency)}
           onCurrencyChange={this.handleChangeCurrency}
@@ -85,12 +93,12 @@ export default class App extends Component {
         />
 
         {portfolio.length > 0 ?
-          <Portfolio currency={currency} btcPrice={btcPrice} portfolio={portfolio} />
+          <Portfolio marketData={marketData} currency={currency} btcPrice={btcPrice} portfolio={portfolio} />
           : null
         }
         {isLoading ? <Loading /> : null}
-        <div>
-          1 BTC = <Price price={btcPrice[currency]} />
+        <div className={styles.Footer}>
+          1 BTC = <Price price={btcPrice[currency]} />. Source: <a target="_blank" href="https://api.coindesk.com/v2/bpi/currentprice.json">Coindesk</a>
         </div>
       </div>
     );

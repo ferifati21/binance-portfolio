@@ -74,6 +74,16 @@ export function fetchBTCRate() {
     })
 }
 
+export function loadMarketCapData() {
+  return fetch('https://api.coinmarketcap.com/v1/ticker/?limit=400')
+  .then((res) => res.json())
+  .then((responseArr) => {
+    const marketData = {};
+    responseArr.map((response) => marketData[response.symbol] = response);
+    return marketData;
+  });
+}
+
 function coinInformationBinance(coin, baseSymbol = "BTC") {
   const {name, symbol} = coin;
   if (symbol === baseSymbol) {

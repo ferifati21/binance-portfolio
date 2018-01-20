@@ -43,6 +43,7 @@ export default class Coin extends PureComponent {
       imageURL,
       prices,
       total,
+      marketCap,
       repartitionPercentage,
       priceChangePercent,
       updateGrowthType,
@@ -58,6 +59,9 @@ export default class Coin extends PureComponent {
         </td>
         <td className={styles.Total}>
           {total}
+        </td>
+        <td className={styles.Total}>
+          {marketCap ? <Price price={marketCap} currency="USD" cents={false} /> : null}
         </td>
         <td className={styles.Percentage}>
           {(repartitionPercentage / 100).toLocaleString('en', {style: 'percent', maximumFractionDigits: 1})}

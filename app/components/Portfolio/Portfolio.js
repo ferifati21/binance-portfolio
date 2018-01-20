@@ -25,7 +25,7 @@ export default class Portfolio extends PureComponent {
   }
 
   render() {
-    const {portfolio, currency} = this.props;
+    const {portfolio, currency, marketData} = this.props;
     const {baseSymbol, growthType} = this.state;
 
     return (
@@ -35,6 +35,7 @@ export default class Portfolio extends PureComponent {
             <tr>
               <th>Symbol</th>
               <th>Number</th>
+              <th>Market Cap</th>
               <th>%</th>
               <th>Value</th>
               <th>
@@ -48,6 +49,7 @@ export default class Portfolio extends PureComponent {
                 {...coin}
                 growthType={growthType}
                 baseSymbol={baseSymbol}
+                marketCap={marketData[baseSymbol] ? Number(marketData[coin.symbol].market_cap_usd) : null}
                 key={coin.symbol}
                 updateGrowthType={this.updateGrowthType}
                 currency={currency}
