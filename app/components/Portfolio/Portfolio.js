@@ -57,7 +57,6 @@ export default class Portfolio extends PureComponent {
             </thead>
             <tbody>
               {portfolio.map((coin) => {
-                console.log(coin.repartitionPercentage)
                 if (hideSmallAssets && coin.repartitionPercentage < 0.5) { return null; }
                 return <Coin
                   {...coin}
