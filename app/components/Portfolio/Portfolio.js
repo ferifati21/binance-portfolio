@@ -58,13 +58,13 @@ export default class Portfolio extends PureComponent {
             <tbody>
               {portfolio.map((coin) => {
                 if (hideSmallAssets && coin.repartitionPercentage < 0.5) { return null; }
+                if (coin.repartitionPercentage === 0) { return null; }
                 return <Coin
                   {...coin}
-                  baseSymbol={baseSymbol}
-                  marketCap={marketData[baseSymbol] ? Number(marketData[coin.symbol].market_cap_usd) : null}
-                  percentChange1h={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_1h) : null}
-                  percentChange24h={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_24h) : null}
-                  percentChange7d={marketData[baseSymbol] ? Number(marketData[coin.symbol].percent_change_7d) : null}
+                  marketCap={marketData[coin.symbol] ? Number(marketData[coin.symbol].market_cap_usd) : null}
+                  percentChange1h={marketData[coin.symbol] ? Number(marketData[coin.symbol].percent_change_1h) : null}
+                  percentChange24h={marketData[coin.symbol] ? Number(marketData[coin.symbol].percent_change_24h) : null}
+                  percentChange7d={marketData[coin.symbol] ? Number(marketData[coin.symbol].percent_change_7d) : null}
                   key={coin.symbol}
                   currency={currency}
                 />
