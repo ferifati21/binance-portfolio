@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import styles from './Popup.css';
 
 export default class Popup extends Component {

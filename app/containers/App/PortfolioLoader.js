@@ -1,7 +1,7 @@
 export function loadPortfolio(btcPrice) {
   const portfolio = [];
   let totalBTCValue = 0;
-  const coinRows = document.querySelectorAll('.items.f-cb');
+  const coinRows = document.querySelectorAll('.td .items.f-cb');
 
   coinRows.forEach((row) => {
     const balance = parseFloat(row.querySelector('.total').textContent);
@@ -13,23 +13,22 @@ export function loadPortfolio(btcPrice) {
 
     Object.keys(btcPrice).map((currency) => {
       prices[currency] = btcValue * btcPrice[currency];
-    })
-
-    if (symbol === 'Coin' || btcValue === 0) { return; }
+    });
 
     portfolio.push({
       btcValue,
       symbol,
       name,
       total,
-      imageURL: row.querySelector('.coin img').src,
+      imageURL: (row.querySelector('.coin img') ? row.querySelector('.coin img').src : ''),
       btcValue,
       prices,
-    })
+    });
 
     totalBTCValue += btcValue;
   });
 
+  console.log(portfolio)
   portfolio.map((coin) => {
     coin.repartitionPercentage = (coin.btcValue * 100) / totalBTCValue;
   });

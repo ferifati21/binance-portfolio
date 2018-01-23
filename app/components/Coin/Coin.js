@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import Price from '../../components/Price';
 import styles from './Coin.css';
 import classNames from 'classnames';
