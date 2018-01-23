@@ -28,7 +28,6 @@ export function loadPortfolio(btcPrice) {
     totalBTCValue += btcValue;
   });
 
-  console.log(portfolio)
   portfolio.map((coin) => {
     coin.repartitionPercentage = (coin.btcValue * 100) / totalBTCValue;
   });
